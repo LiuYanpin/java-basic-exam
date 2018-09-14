@@ -483,7 +483,12 @@ class StreamingTest {
         // TODO: implement grouping collector using `stream.collect`. You should use `Collectors.groupingBy` and
         // TODO: downstream collector.
         // <--start
-        Map<String, Integer> map = null;
+        Map<String, Integer> map = stream.collect(
+                Collectors.groupingBy(
+                        KeyValuePair::getKey,
+                        Collectors.summingInt(KeyValuePair::getValue)
+                )
+        );
         // --end-->
 
         assertEquals(2, map.size());
