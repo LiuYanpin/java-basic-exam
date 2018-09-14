@@ -52,14 +52,14 @@ class CollectionsTest {
         staff.add("Carl");
 
         ListIterator<String> iterator = staff.listIterator();
-        iterator.next();
-        iterator.add("Juliet");
-        iterator.previous();
-        iterator.remove();
+        iterator.next();//返回Amy, 指向Bob
+        iterator.add("Juliet");//Amy, Juliet, Bob,
+        iterator.previous();//指向Juliet
+        iterator.remove();//删除Juliet
 
         // TODO: please modify the following code to pass the test
         // <--start
-        final List<String> expected = Arrays.asList("I", "Don't", "Know");
+        final List<String> expected = Arrays.asList("Amy", "Bob", "Carl");
         // --end-->
 
         assertIterableEquals(expected, staff);
