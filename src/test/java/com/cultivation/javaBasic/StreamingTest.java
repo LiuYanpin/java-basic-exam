@@ -527,7 +527,6 @@ class StreamingTest {
                 (sum1, sum2) -> sum1 + sum2
         );
         // --end-->
-
         assertEquals(15, total.intValue());
     }
 
