@@ -394,7 +394,26 @@ class StreamingTest {
         // <--start
         HashMap<String, List<Integer>> map = stream.collect(
                 HashMap::new,
-                (currentHashMap, itemToBeMerge)
+                (currentHashMap, itemToBeMerge) -> {
+                    String itemToBeMergeKey = itemToBeMerge.getKey();
+                    Integer itemToBeMergeValue = itemToBeMerge.getValue();
+                    if (currentHashMap.containsKey(itemToBeMergeKey)) {
+                        currentHashMap.get(itemToBeMergeKey).add(itemToBeMergeValue);
+                    }else {
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(itemToBeMergeValue);
+                        currentHashMap.put(itemToBeMergeKey, list);
+                    }
+                },
+                (finallyHashMap, ToBeMergeHashMap) -> {
+                    ToBeMergeHashMap.forEach((toBeMergeKey, toBeMergeValue) -> {
+                        if (finallyHashMap.containsKey(toBeMergeKey)) {
+                            finallyHashMap.get(toBeMergeKey).addAll(toBeMergeValue);
+                        }else {
+                            finallyHashMap.put(toBeMergeKey, toBeMergeValue);
+                        }
+                    });
+                }
         );
         // --end-->
 
