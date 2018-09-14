@@ -2,7 +2,12 @@ package com.cultivation.javaBasic;
 
 import com.cultivation.javaBasic.util.Employee;
 import com.cultivation.javaBasic.util.MethodWithAnnotation;
+import com.sun.tools.javac.util.List;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,8 +58,17 @@ class ReflectionTest {
         Class<Double> doubleClass = Double.class;
 
         // TODO: please get all public static declared methods of Double. Sorted in an ascending order
+        Method[] methods = doubleClass.getDeclaredMethods();
+        ArrayList<String> list = new ArrayList<>();
+        for (Method method: methods
+             ) {
+            if (Modifier.isPublic(method.getModifiers()) && Modifier.isStatic(method.getModifiers())) {
+                list.add(method.getName());
+            }
+        }
+        list.sort(String::compareTo);
+        String[] publicStaticMethods = list.toArray(new String[0]);
         // <--start
-        String[] publicStaticMethods = null;
         // --end-->
 
         final String[] expected = {
