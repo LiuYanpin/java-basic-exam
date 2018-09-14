@@ -516,7 +516,11 @@ class StreamingTest {
 
         // TODO: please calculate the total number of characters using `reduce`.
         // <--start
-        Integer total = null;
+        Integer total = words.stream().reduce(
+                0,
+                (sumOfLength, word) -> sumOfLength + word.length(),
+                (sum1, sum2) -> sum1 + sum2
+        );
         // --end-->
 
         assertEquals(15, total.intValue());
