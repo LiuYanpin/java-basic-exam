@@ -14,6 +14,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.sun.tools.doclint.Entity.sum;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StreamingTest {
@@ -501,7 +502,7 @@ class StreamingTest {
 
         // TODO: please modify the following code to pass the test
         // <--start
-        Optional<Integer> reduced = null;
+        Optional<Integer> reduced = numbers.stream().reduce(Integer::sum);
         // --end-->
 
         //noinspection ConstantConditions
